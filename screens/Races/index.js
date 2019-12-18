@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-
+import { View, Button, Text, StyleSheet } from 'react-native';
 import Loading from '../../components/Loading';
+
 import fonts from '../../fonts';
 
 const style = StyleSheet.create({
@@ -23,6 +23,7 @@ export default class Races extends Component {
 
   componentDidMount() {
     const season = this.props.navigation.getParam('season');
+    this.setState({ season: season });
     this.getData(season);
   }
 
@@ -39,29 +40,53 @@ export default class Races extends Component {
 
   renderRaces() {
     if (this.state.data.length === 0 ) {
-      return null;
+        return null;
     }
 
     let element = [];
+
+    //Titulo da listagem
+    element.push(
+        <View>
+            <Text>Corridas da Temporada de {this.state.season}</Text> 
+        </View>
+    )
+
+    //varre retorno da API para mostrar local das corridas da temporada escolhida
     for (let index = 0; index < this.state.data.length; index++) {
         element.push(
-            <View>
-                <Text>
-                    { this.state.data[index].Circuit.Location.country }
-                </Text>
-            </View>
+            <Button
+                key={ `races-${this.state.season}` }
+                onPress={ () => this.props.navigation.navigate('Details', 
+                  { detTitle: `Grande Prêmio de ${this.state.data[index].Circuit.Location.country} (Temporada de ${this.state.season})`,
+
+                    detSubjInfo1: 'Circuito',
+                    detValueInfo1: `${this.state.data[index].Circuit.circuitName}`,
+
+                    detSubjInfo2: 'Data',
+                    detValueInfo2: `${this.state.data[index].date}`,
+
+                    detSubjInfo3: 'Cidade',
+                    detValueInfo3: `${this.state.data[index].Circuit.Location.locality}`,
+
+                   } ) }
+                title={ this.state.data[index].Circuit.Location.country }>
+            </Button>            
         )
     }
 
+    this.state.loading = false;
     return element;
   }
 
   render() {
-    return (
-      <SafeAreaView style={ style.container }>
-          <Loading show={ this.state.loading } color="blue"/>
-          { this.renderRaces() }
-      </SafeAreaView>
-  );
+      return (
+          <SafeAreaView style={ style.container }>
+              <Loading show={ this.state.loading } color="blue"/>
+              { 
+                this.renderRaces() 
+              }
+          </SafeAreaView>
+      );
   }
 }

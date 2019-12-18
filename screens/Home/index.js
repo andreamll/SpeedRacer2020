@@ -7,11 +7,9 @@ import { SafeAreaView } from 'react-navigation';
 
 import fonts from '../../fonts';
 import Logo from '../../components/Logo';
-
 import Seasons from './components/seasons';
 
-
-//Estilizacao
+//Estilizacao da tela
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -20,10 +18,8 @@ const style = StyleSheet.create({
   }
 });
 
-
-//Definicao da fonte do app
+//Import das fontes
 (fonts());
-
 
 //Renderizacao da tela
 export default class Home extends Component {
@@ -36,9 +32,11 @@ export default class Home extends Component {
 
     this.getData = this.getData.bind(this);
   }
-
+  
+  //De acordo com a temporada escolhida, carrega o menu para escolha 
+  //das opcoes: Construtores, Pilotos ou Corridas
   getData(year) {
-    this.props.navigation.navigate('Season', { season: year });
+    this.props.navigation.navigate('Menu', { season: year });
   }
   
   render() {

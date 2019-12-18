@@ -1,22 +1,11 @@
 //Primeira tela
-//Listar as temporadas e escolher uma. A partir daqui, chama o menu para escolher entre Constructor, Driver ou Race
+//Monta e mostra listagem com as temporadas
 
 import React from 'react';
-import { View } from 'react-native';
-import { Button, Text, StyleSheet } from 'native-base';
+import { SafeAreaView } from 'react-navigation';
+import { Button, Text } from 'native-base';
 
-import Menu from '../../Menu';
-
-const style = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    }
-  });
-  
-(fonts());
-
+// Listagem das temporadas por ano
 const Seasons = (props) => {
     const renderSeasons = () => {
         let items = [];
@@ -36,7 +25,7 @@ const Seasons = (props) => {
     }
 
     return (
-        <View>{ renderSeasons() }</View>
+        <SafeAreaView>{ renderSeasons() }</SafeAreaView>
     );
 };
 

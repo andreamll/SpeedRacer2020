@@ -2,10 +2,10 @@
 //Mostrar dados dos pilotos
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-
+import { View, Button, Text, StyleSheet } from 'react-native';
 import Loading from '../../components/Loading';
+
 import fonts from '../../fonts';
 
 const style = StyleSheet.create({
@@ -26,15 +26,16 @@ export default class Drivers extends Component {
 
   componentDidMount() {
     const season = this.props.navigation.getParam('season');
+    this.setState({ season: season });
     this.getData(season);
   }
 
   getData(season) {
-    fetch(`http://ergast.com/api/f1/${season}/Drivers.json`)
+    fetch(`http://ergast.com/api/f1/${season}/drivers.json`)
       .then((response) => response.json())
       .then((response) => {
-        const Drivers = response.MRData.DriverTable.Drivers;
-        this.setState({ loading: false, data: Drivers });
+        const races = response.MRData.DriverTable.Drivers;
+        this.setState({ loading: false, data: races });
       })
       .catch(err => console.error(err));
 
@@ -42,29 +43,53 @@ export default class Drivers extends Component {
 
   renderDrivers() {
     if (this.state.data.length === 0 ) {
-      return null;
+        return null;
     }
 
     let element = [];
+
+    //Titulo da listagem
+    element.push(
+        <View>
+            <Text>Pilotos da Temporada de {this.state.season}</Text> 
+        </View>
+    )
+
+    //varre retorno da API para mostrar local das corridas da temporada escolhida
     for (let index = 0; index < this.state.data.length; index++) {
         element.push(
-            <View>
-                <Text>
-                    { this.state.data[index].familyName }
-                </Text>
-            </View>
+            <Button
+                key={ `drivers-${this.state.season}` }
+                onPress={ () => this.props.navigation.navigate('Details', 
+                  { detTitle: `Pilotos da Temporada de ${this.state.season}`,
+
+                    detSubjInfo1: 'Nome Completo',
+                    detValueInfo1: `${this.state.data[index].givenName} ${this.state.data[index].familyName}`,
+
+                    detSubjInfo2: 'Data de Nascimento',
+                    detValueInfo2: `${this.state.data[index].dateOfBirth}`,
+
+                    detSubjInfo3: 'Nacionalidade',
+                    detValueInfo3: `${this.state.data[index].nationality}`,
+
+                   } ) }
+                title={ this.state.data[index].givenName + ' ' + this.state.data[index].familyName}>
+            </Button>            
         )
     }
 
+    this.state.loading = false;
     return element;
   }
 
   render() {
-    return (
-      <SafeAreaView style={ style.container }>
-          <Loading show={ this.state.loading } color="blue"/>
-          { this.renderDrivers() }
-      </SafeAreaView>
-  );
+      return (
+          <SafeAreaView style={ style.container }>
+              <Loading show={ this.state.loading } color="blue"/>
+              { 
+                this.renderDrivers() 
+              }
+          </SafeAreaView>
+      );
   }
 }
