@@ -77,9 +77,10 @@ export default class Constructors extends Component {
             </Button>            
         )
     }
-
-    this.state.loading = false;
+    
     return element;
+
+    this.setState({ loading: false});    
   }
 
   render() {

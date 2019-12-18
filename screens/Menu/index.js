@@ -3,8 +3,7 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Button, Text, StyleSheet } from 'react-native';
-import Loading from '../../components/Loading';
+import { Button, StyleSheet } from 'react-native';
 
 import fonts from '../../fonts';
 
@@ -28,7 +27,9 @@ export default class Menu extends Component {
   }
 
     //Mostra botoes com opcoes de navegacao
-    showMenu(season) {
+    showMenu() {
+
+        const season = this.props.navigation.getParam('season');
         let items = [];
 
         items.push(
@@ -53,18 +54,13 @@ export default class Menu extends Component {
                 title="Races">
             </Button>
         );
-
-        this.state.loading = false;
         return items;
     }
 
     render() {
         return (
             <SafeAreaView style={ style.container }>
-                <Loading show={ this.state.loading } color="blue"/>
-                {
-                    this.showMenu( this.props.navigation.getParam('season') ) 
-                }
+                { this.showMenu() }
             </SafeAreaView>
         );
     }

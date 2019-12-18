@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-import Loading from '../../components/Loading';
 import fonts from '../../fonts';
 
 const style = StyleSheet.create({
@@ -65,18 +64,14 @@ export default class Drivers extends Component {
           </Text>
       </View>
     )
-    
-    this.state.loading = false;
+
     return element;
   }
 
   render() {
     return (
       <SafeAreaView style={ style.container }>
-          <Loading show={ this.state.loading } color="blue"/>
-          { 
-            this.renderDetails() 
-          }
+          { this.renderDetails() }
       </SafeAreaView>
   );
   }

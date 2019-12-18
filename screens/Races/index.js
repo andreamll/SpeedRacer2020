@@ -74,9 +74,9 @@ export default class Races extends Component {
             </Button>            
         )
     }
-
-    this.state.loading = false;
     return element;
+
+    this.setState({ loading: false});
   }
 
   render() {
