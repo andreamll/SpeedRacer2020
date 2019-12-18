@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Button, StyleSheet } from 'react-native';
+import { Button, StyleSheet, ScrollView } from 'react-native';
 
 import fonts from '../../fonts';
 
@@ -27,7 +27,7 @@ export default class Menu extends Component {
   }
 
     //Mostra botoes com opcoes de navegacao
-    showMenu() {
+    renderMenu() {
 
         const season = this.props.navigation.getParam('season');
         let items = [];
@@ -59,8 +59,10 @@ export default class Menu extends Component {
 
     render() {
         return (
-            <SafeAreaView style={ style.container }>
-                { this.showMenu() }
+            <SafeAreaView>
+                <ScrollView>
+                    { this.renderMenu() }
+                </ScrollView>
             </SafeAreaView>
         );
     }

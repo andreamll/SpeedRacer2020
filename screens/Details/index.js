@@ -2,7 +2,7 @@
 //Mostrar dados dos pilotos
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import fonts from '../../fonts';
@@ -71,7 +71,9 @@ export default class Drivers extends Component {
   render() {
     return (
       <SafeAreaView style={ style.container }>
+        <ScrollView>
           { this.renderDetails() }
+        </ScrollView>
       </SafeAreaView>
   );
   }

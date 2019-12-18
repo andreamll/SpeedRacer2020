@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
 import Loading from '../../components/Loading';
 
 import fonts from '../../fonts';
@@ -56,7 +56,7 @@ export default class Races extends Component {
     for (let index = 0; index < this.state.data.length; index++) {
         element.push(
             <Button
-                key={ `races-${this.state.season}` }
+                key={ `races-${this.state.season}-${index}` }
                 onPress={ () => this.props.navigation.navigate('Details', 
                   { detTitle: `Grande Prêmio de ${this.state.data[index].Circuit.Location.country} (Temporada de ${this.state.season})`,
 
@@ -82,10 +82,12 @@ export default class Races extends Component {
   render() {
       return (
           <SafeAreaView style={ style.container }>
-              <Loading show={ this.state.loading } color="blue"/>
-              { 
-                this.renderRaces() 
-              }
+              <ScrollView>
+                <Loading show={ this.state.loading } color="blue"/>
+                { 
+                  this.renderRaces() 
+                }
+              </ScrollView>
           </SafeAreaView>
       );
   }

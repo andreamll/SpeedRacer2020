@@ -2,7 +2,7 @@
 //Mostra listagem com as temporadas
 
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import fonts from '../../fonts';
@@ -13,6 +13,7 @@ import Seasons from './components/seasons';
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
   }
@@ -24,7 +25,8 @@ const style = StyleSheet.create({
 //Renderizacao da tela
 export default class Home extends Component {
   static navigationOptions = {
-    headerTitle: <Logo />,
+    //headerTitle: <Logo />,
+    headerTitle: 'SpeedRacer 2020'
   }
 
   constructor(props) {
@@ -42,7 +44,10 @@ export default class Home extends Component {
   render() {
     return (
       <SafeAreaView style={ style.container }>
-        <Seasons handleSeason={ this.getData } />
+        <ScrollView>
+          <Logo />
+          <Seasons handleSeason={ this.getData } />
+        </ScrollView>
       </SafeAreaView>
     );
   }

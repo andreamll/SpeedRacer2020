@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, ScrollView, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
 import Loading from '../../components/Loading';
 
 import fonts from '../../fonts';
@@ -50,9 +50,9 @@ export default class Drivers extends Component {
 
     //Titulo da listagem
     element.push(
-        <ScrollView>
+        <View>
             <Text>Pilotos da Temporada de {this.state.season}</Text> 
-        </ScrollView>
+        </View>
     )
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida
@@ -86,10 +86,12 @@ export default class Drivers extends Component {
   render() {
       return (
           <SafeAreaView style={ style.container }>
+            <ScrollView>
               <Loading show={ this.state.loading } color="blue"/>
               { 
                 this.renderDrivers() 
               }
+            </ScrollView>
           </SafeAreaView>
       );
   }

@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
 import Loading from '../../components/Loading';
 
 import fonts from '../../fonts';
@@ -86,10 +86,12 @@ export default class Constructors extends Component {
   render() {
       return (
           <SafeAreaView style={ style.container }>
+            <ScrollView>
               <Loading show={ this.state.loading } color="blue"/>
               { 
                 this.renderConstructors() 
               }
+            </ScrollView>
           </SafeAreaView>
       );
   }
