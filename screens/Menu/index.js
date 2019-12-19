@@ -3,7 +3,8 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Button, ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Button, Text } from 'native-base';
 
 //Estilizacao da tela
 import Logo from '../../components/Logo';
@@ -25,26 +26,29 @@ export default class Menu extends Component {
         items.push(
             //Construtores
             <Button
-                style=  {style.boxPar}
+                style=  { [style.box, style.boxImpar] }
                 key={ `constructors-${season}` }
                 onPress={ () => this.props.navigation.navigate('Constructors', { season: season } ) }
-                title="Constructors">
+            >
+                <Text style= {style.boxText}>Construtores</Text>
             </Button>,
 
             //Pilotos
             <Button
-                //style=  {style.boxImpar}
+                style=  { [style.box, style.boxPar] }
                 key={ `drivers-${season}` }
                 onPress={ () => this.props.navigation.navigate('Drivers', { season: season } ) }
-                title="Drivers">
+            >
+                <Text style= {style.boxText}>Pilotos</Text>
             </Button>,
 
             //Corridas
             <Button
-                //style= {style.boxPar}
+                style=  { [style.box, style.boxImpar] }
                 key={ `races-${season}` }
                 onPress={ () => this.props.navigation.navigate('Races', { season: season } ) }
-                title="Races">
+            >
+                <Text style= {style.boxText}>Corridas</Text>
             </Button>
         );
         return items;

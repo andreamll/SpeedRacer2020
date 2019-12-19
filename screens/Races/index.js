@@ -1,21 +1,17 @@
+//Opcao de terceira tela
+//Mostrar dados das corridas
+
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Button, Text } from 'native-base';
+
+//Estilizacao da tela
 import Loading from '../../components/Loading';
+import Logo from '../../components/Logo';
+import style from '../../components/Styles'
 
-import fonts from '../../fonts';
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-//Import das fontes
-(fonts());
-
+//Renderizacao da tela
 export default class Races extends Component {
   state = {
     data: [],
@@ -48,32 +44,56 @@ export default class Races extends Component {
 
     //Titulo da listagem
     element.push(
-        <View>
-            <Text>Corridas da Temporada de {this.state.season}</Text> 
-        </View>
+        <Text style= {style.mainTitle}>Corridas da Temporada de {this.state.season}</Text> 
     )
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida
     for (let index = 0; index < this.state.data.length; index++) {
-        element.push(
-            <Button
-                key={ `races-${this.state.season}-${index}` }
-                onPress={ () => this.props.navigation.navigate('Details', 
-                  { detTitle: `Grande Prêmio de ${this.state.data[index].Circuit.Location.country} (Temporada de ${this.state.season})`,
+      if ( index % 2 == 0) {
+        element.push(        
+          <Button
+              style=  { [style.box, style.boxPar] }
+              key={ `races-${this.state.season}-${index}` }
+              onPress={ () => this.props.navigation.navigate('Details', 
+                { detTitle: `Grande Prêmio de ${this.state.data[index].Circuit.Location.country} (Temporada de ${this.state.season})`,
 
-                    detSubjInfo1: 'Circuito',
-                    detValueInfo1: `${this.state.data[index].Circuit.circuitName}`,
+                  detSubjInfo1: 'Circuito',
+                  detValueInfo1: `${this.state.data[index].Circuit.circuitName}`,
 
-                    detSubjInfo2: 'Data',
-                    detValueInfo2: `${this.state.data[index].date}`,
+                  detSubjInfo2: 'Data',
+                  detValueInfo2: `${this.state.data[index].date}`,
 
-                    detSubjInfo3: 'Cidade',
-                    detValueInfo3: `${this.state.data[index].Circuit.Location.locality}`,
+                  detSubjInfo3: 'Cidade',
+                  detValueInfo3: `${this.state.data[index].Circuit.Location.locality}`,
 
-                   } ) }
-                title={ this.state.data[index].Circuit.Location.country }>
-            </Button>            
+                } ) }
+          >
+              <Text style= {style.boxText}>{ this.state.data[index].Circuit.Location.country }</Text>
+          </Button>
         )
+      } else {
+        element.push(
+          <Button
+              style=  { [style.box, style.boxImpar] }
+              key={ `races-${this.state.season}-${index}` }
+              onPress={ () => this.props.navigation.navigate('Details', 
+                { detTitle: `GP ${this.state.data[index].Circuit.Location.country} (Temporada de ${this.state.season})`,
+
+                  detSubjInfo1: 'Circuito',
+                  detValueInfo1: `${this.state.data[index].Circuit.circuitName}`,
+
+                  detSubjInfo2: 'Data',
+                  detValueInfo2: `${this.state.data[index].date}`,
+
+                  detSubjInfo3: 'Cidade',
+                  detValueInfo3: `${this.state.data[index].Circuit.Location.locality}`,
+
+                  } ) }
+          >
+                  <Text style= {style.boxText}>{ this.state.data[index].Circuit.Location.country }</Text>
+          </Button>            
+        )
+      }
     }
     return element;
 
@@ -84,10 +104,9 @@ export default class Races extends Component {
       return (
           <SafeAreaView style={ style.container }>
               <ScrollView>
-                <Loading show={ this.state.loading } color="blue"/>
-                { 
-                  this.renderRaces() 
-                }
+                <Logo />
+                <Loading show={ this.state.loading } color="blue" style={ style.container }/>                
+                { this.renderRaces() }
               </ScrollView>
           </SafeAreaView>
       );

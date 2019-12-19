@@ -1,29 +1,17 @@
-//Opcao de terceira tela
-//Mostrar dados dos pilotos
+//Quarta tela
+//Mostrar dados do item selecionado
 
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import { ScrollView } from 'react-native';
+import { Text } from 'native-base';
 
-import fonts from '../../fonts';
+//Estilizacao da tela
+import Logo from '../../components/Logo';
+import style from '../../components/Styles'
 
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-//Import das fontes
-(fonts());
-
-export default class Drivers extends Component {
-  state = {
-    data: [],
-    loading: true,
-  }
-
+//Renderizacao da tela
+export default class Details extends Component {
   componentDidMount() {
     const season = this.props.navigation.getParam('season');
   }
@@ -34,47 +22,41 @@ export default class Drivers extends Component {
 
     //Titulo da listagem
     element.push(
-      <View>
-          <Text>{ this.props.navigation.getParam('detTitle') }</Text>
-      </View>
+      <Text style= {style.mainTitle}>{ this.props.navigation.getParam('detTitle') }</Text>
     )
 
     //Info 1
     element.push(
-      <View>
-          <Text>
-              {this.props.navigation.getParam('detSubjInfo1')}: {this.props.navigation.getParam('detValueInfo1')} 
-          </Text>
-      </View>
+      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo1')}:</Text>,
+      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo1')}</Text>,
+      <Text style= {style.detTitle}>&nbsp;</Text>,
     )
 
     //Info 2
     element.push(
-      <View>
-          <Text>
-              {this.props.navigation.getParam('detSubjInfo2')}: {this.props.navigation.getParam('detValueInfo2')} 
-          </Text>
-      </View>
+      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo2')}:</Text>,
+      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo2')}</Text>,
+      <Text style= {style.detTitle}>&nbsp;</Text>,
     )
 
     //Info 3
     element.push(
-      <View>
-          <Text>
-              {this.props.navigation.getParam('detSubjInfo3')}: {this.props.navigation.getParam('detValueInfo3')} 
-          </Text>
-      </View>
+      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo3')}:</Text>,
+      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo3')}</Text>,
+      <Text style= {style.detTitle}>&nbsp;</Text>,
     )
-
     return element;
+
+    this.setState({ loading: false});  
   }
 
   render() {
     return (
       <SafeAreaView style={ style.container }>
-        <ScrollView>
-          { this.renderDetails() }
-        </ScrollView>
+          <ScrollView>
+            <Logo />            
+            { this.renderDetails() }
+          </ScrollView>
       </SafeAreaView>
   );
   }

@@ -21,7 +21,7 @@ const Seasons = (props) => {
                         key={ `season-${year}` }
                         onPress={ () => props.handleSeason(year) }
                     >
-                        <Text>Temporada de { year }</Text>
+                        <Text style= {style.boxText}>Temporada de { year }</Text>
                 </Button>
                 );
             }
@@ -32,7 +32,7 @@ const Seasons = (props) => {
                         key={ `season-${year}` }
                         onPress={ () => props.handleSeason(year) }
                     >
-                        <Text>Temporada de { year }</Text>
+                        <Text style= {style.boxText}>Temporada de { year }</Text>
                 </Button>
                 );
             }

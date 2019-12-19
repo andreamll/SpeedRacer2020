@@ -3,12 +3,15 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, ScrollView } from 'react-native';
-import Loading from '../../components/Loading';
+import { ScrollView } from 'react-native';
+import { Button, Text } from 'native-base';
 
 //Estilizacao da tela
+import Loading from '../../components/Loading';
+import Logo from '../../components/Logo';
 import style from '../../components/Styles'
 
+//Renderizacao da tela
 export default class Constructors extends Component {
   state = {
     data: [],
@@ -25,8 +28,8 @@ export default class Constructors extends Component {
     fetch(`http://ergast.com/api/f1/${season}/constructors.json`)
       .then((response) => response.json())
       .then((response) => {
-        const races = response.MRData.ConstructorTable.Constructors;
-        this.setState({ loading: false, data: races });
+        const constructors = response.MRData.ConstructorTable.Constructors;
+        this.setState({ loading: false, data: constructors });
       })
       .catch(err => console.error(err));
 
@@ -41,9 +44,7 @@ export default class Constructors extends Component {
 
     //Titulo da listagem
     element.push(
-        <View>
-            <Text>Construtores da Temporada de {this.state.season}</Text> 
-        </View>
+      <Text style= {style.mainTitle}>Construtores da Temporada de {this.state.season}</Text> 
     )
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida
@@ -62,11 +63,11 @@ export default class Constructors extends Component {
                   detSubjInfo2: 'Nacionalidade',
                   detValueInfo2: `${this.state.data[index].nationality}`,
 
-                  detSubjInfo3: 'Link',
-                  detValueInfo3: `${this.state.data[index].url}`,
-
+                  detSubjInfo3: 'Campeonato',
+                  detValueInfo3: `Formule 1`,
                   } ) }
-              title={ this.state.data[index].name}>
+            >
+              <Text style= {style.boxText}>{ this.state.data[index].name}</Text>
             </Button>
         )            
       }
@@ -84,11 +85,12 @@ export default class Constructors extends Component {
                 detSubjInfo2: 'Nacionalidade',
                 detValueInfo2: `${this.state.data[index].nationality}`,
 
-                detSubjInfo3: 'Link',
-                detValueInfo3: `${this.state.data[index].url}`,
+                detSubjInfo3: 'Campeonato',
+                detValueInfo3: `Formule 1`,
 
                 } ) }
-            title={ this.state.data[index].name}>
+          >
+            <Text style= {style.boxText}>{ this.state.data[index].name}</Text>
           </Button>
       )     
       }
@@ -101,14 +103,13 @@ export default class Constructors extends Component {
 
   render() {
       return (
-          <SafeAreaView style={ style.container }>
+        <SafeAreaView style={ style.container }>
             <ScrollView>
-              <Loading show={ this.state.loading } color="blue"/>
-              { 
-                this.renderConstructors() 
-              }
+              <Logo />
+              <Loading show={ this.state.loading } color="blue" style={ style.container }/>                
+              { this.renderConstructors() }
             </ScrollView>
-          </SafeAreaView>
+        </SafeAreaView>
       );
   }
 }

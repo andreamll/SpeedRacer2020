@@ -26,14 +26,21 @@ const style = StyleSheet.create({
   boxPar: {    
     //backgroundColor: '#8BC34A'
   },
+  boxText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   detail: {
     marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },
   mainTitle: {
-    fontSize: 30,
+    fontSize: 20,
+    fontWeight: 'bold',
     color: '#8b0000', //darkred
+    marginTop: 10,
+    marginBottom: 30,
   },
   detTitle: {
     fontSize: 16,

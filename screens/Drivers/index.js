@@ -3,22 +3,15 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Button, Text } from 'native-base';
+
+//Estilizacao da tela
 import Loading from '../../components/Loading';
+import Logo from '../../components/Logo';
+import style from '../../components/Styles'
 
-import fonts from '../../fonts';
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-//Import das fontes
-(fonts());
-
+//Renderizacao da tela
 export default class Drivers extends Component {
   state = {
     data: [],
@@ -35,8 +28,8 @@ export default class Drivers extends Component {
     fetch(`http://ergast.com/api/f1/${season}/drivers.json`)
       .then((response) => response.json())
       .then((response) => {
-        const races = response.MRData.DriverTable.Drivers;
-        this.setState({ loading: false, data: races });
+        const drivers = response.MRData.DriverTable.Drivers;
+        this.setState({ loading: false, data: drivers });
       })
       .catch(err => console.error(err));
 
@@ -51,34 +44,57 @@ export default class Drivers extends Component {
 
     //Titulo da listagem
     element.push(
-        <View>
-            <Text>Pilotos da Temporada de {this.state.season}</Text> 
-        </View>
+      <Text style= {style.mainTitle}>Pilotos da Temporada de {this.state.season}</Text> 
     )
 
-    //varre retorno da API para mostrar local das corridas da temporada escolhida
+    //varre retorno da API para mostrar pilotos da temporada escolhida
     for (let index = 0; index < this.state.data.length; index++) {
-        element.push(
-            <Button
-                key={ `drivers-${this.state.season}-${index}` }
-                onPress={ () => this.props.navigation.navigate('Details', 
-                  { detTitle: `Pilotos da Temporada de ${this.state.season}`,
+      if ( index % 2 == 0) {
+        element.push(        
+          <Button
+              style=  { [style.box, style.boxPar] }
+              key={ `drivers-${this.state.season}-${index}` }
+              onPress={ () => this.props.navigation.navigate('Details', 
+                { detTitle: `Pilotos da Temporada de ${this.state.season}`,
 
-                    detSubjInfo1: 'Nome Completo',
-                    detValueInfo1: `${this.state.data[index].givenName} ${this.state.data[index].familyName}`,
+                  detSubjInfo1: 'Nome Completo',
+                  detValueInfo1: `${this.state.data[index].givenName} ${this.state.data[index].familyName}`,
 
-                    detSubjInfo2: 'Data de Nascimento',
-                    detValueInfo2: `${this.state.data[index].dateOfBirth}`,
+                  detSubjInfo2: 'Data de Nascimento',
+                  detValueInfo2: `${this.state.data[index].dateOfBirth}`,
 
-                    detSubjInfo3: 'Nacionalidade',
-                    detValueInfo3: `${this.state.data[index].nationality}`,
+                  detSubjInfo3: 'Nacionalidade',
+                  detValueInfo3: `${this.state.data[index].nationality}`,
 
-                   } ) }
-                title={ this.state.data[index].givenName + ' ' + this.state.data[index].familyName}>
-            </Button>            
+                  } ) }
+            >
+              <Text style= {style.boxText}>{ this.state.data[index].givenName + ' ' + this.state.data[index].familyName }</Text>
+          </Button>
         )
-    }
+      } else {
+        element.push(
+          <Button
+            style=  { [style.box, style.boxImpar] }
+            key={ `drivers-${this.state.season}-${index}` }
+            onPress={ () => this.props.navigation.navigate('Details', 
+              { detTitle: `Pilotos da Temporada de ${this.state.season}`,
 
+                detSubjInfo1: 'Nome Completo',
+                detValueInfo1: `${this.state.data[index].givenName} ${this.state.data[index].familyName}`,
+
+                detSubjInfo2: 'Data de Nascimento',
+                detValueInfo2: `${this.state.data[index].dateOfBirth}`,
+
+                detSubjInfo3: 'Nacionalidade',
+                detValueInfo3: `${this.state.data[index].nationality}`,
+
+                } ) }
+            >
+            <Text style= {style.boxText}>{ this.state.data[index].givenName + ' ' + this.state.data[index].familyName }</Text>
+          </Button>         
+        )
+      }
+    }
     return element;
 
     this.setState({ loading: false});
@@ -86,14 +102,13 @@ export default class Drivers extends Component {
 
   render() {
       return (
-          <SafeAreaView style={ style.container }>
+        <SafeAreaView style={ style.container }>
             <ScrollView>
-              <Loading show={ this.state.loading } color="blue"/>
-              { 
-                this.renderDrivers() 
-              }
+              <Logo />
+              <Loading show={ this.state.loading } color="blue" style={ style.container }/>                
+              { this.renderDrivers() }
             </ScrollView>
-          </SafeAreaView>
+        </SafeAreaView>
       );
   }
 }
