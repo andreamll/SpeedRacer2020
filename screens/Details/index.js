@@ -15,6 +15,7 @@ const style = StyleSheet.create({
   }
 });
 
+//Import das fontes
 (fonts());
 
 export default class Drivers extends Component {

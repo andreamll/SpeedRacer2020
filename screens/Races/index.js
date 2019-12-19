@@ -13,6 +13,7 @@ const style = StyleSheet.create({
   }
 });
 
+//Import das fontes
 (fonts());
 
 export default class Races extends Component {

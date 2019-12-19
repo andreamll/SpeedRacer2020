@@ -3,20 +3,11 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { View, Button, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, Text, ScrollView } from 'react-native';
 import Loading from '../../components/Loading';
 
-import fonts from '../../fonts';
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-(fonts());
+//Estilizacao da tela
+import style from '../../components/Styles'
 
 export default class Constructors extends Component {
   state = {
@@ -57,25 +48,50 @@ export default class Constructors extends Component {
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida
     for (let index = 0; index < this.state.data.length; index++) {
+      if ( index % 2 == 0) {
         element.push(
             <Button
-                key={ `Constructors-${this.state.season}` }
-                onPress={ () => this.props.navigation.navigate('Details', 
-                  { detTitle: `Construtores da Temporada de ${this.state.season}`,
+              style= { [style.box, style.boxPar] }
+              key={ `Constructors-${this.state.season}-${index}` }
+              onPress={ () => this.props.navigation.navigate('Details', 
+                { detTitle: `Construtores da Temporada de ${this.state.season}`,
 
-                    detSubjInfo1: 'Construtor',
-                    detValueInfo1: `${this.state.data[index].name}`,
+                  detSubjInfo1: 'Construtor',
+                  detValueInfo1: `${this.state.data[index].name}`,
 
-                    detSubjInfo2: 'Nacionalidade',
-                    detValueInfo2: `${this.state.data[index].nationality}`,
+                  detSubjInfo2: 'Nacionalidade',
+                  detValueInfo2: `${this.state.data[index].nationality}`,
 
-                    detSubjInfo3: 'Link',
-                    detValueInfo3: `${this.state.data[index].url}`,
+                  detSubjInfo3: 'Link',
+                  detValueInfo3: `${this.state.data[index].url}`,
 
-                   } ) }
-                title={ this.state.data[index].name}>
-            </Button>            
-        )
+                  } ) }
+              title={ this.state.data[index].name}>
+            </Button>
+        )            
+      }
+      else {
+        element.push(
+          <Button
+            style= { [style.box, style.boxImpar] }
+            key={ `Constructors-${this.state.season}-${index}` }
+            onPress={ () => this.props.navigation.navigate('Details', 
+              { detTitle: `Construtores da Temporada de ${this.state.season}`,
+
+                detSubjInfo1: 'Construtor',
+                detValueInfo1: `${this.state.data[index].name}`,
+
+                detSubjInfo2: 'Nacionalidade',
+                detValueInfo2: `${this.state.data[index].nationality}`,
+
+                detSubjInfo3: 'Link',
+                detValueInfo3: `${this.state.data[index].url}`,
+
+                } ) }
+            title={ this.state.data[index].name}>
+          </Button>
+      )     
+      }
     }
     
     return element;

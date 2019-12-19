@@ -3,21 +3,11 @@
 
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { Button, StyleSheet, ScrollView } from 'react-native';
-
-import fonts from '../../fonts';
+import { Button, ScrollView, View } from 'react-native';
 
 //Estilizacao da tela
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-//Import das fontes
-(fonts());
+import Logo from '../../components/Logo';
+import style from '../../components/Styles'
 
 //Renderizacao da tela
 export default class Menu extends Component {
@@ -35,6 +25,7 @@ export default class Menu extends Component {
         items.push(
             //Construtores
             <Button
+                style=  {style.boxPar}
                 key={ `constructors-${season}` }
                 onPress={ () => this.props.navigation.navigate('Constructors', { season: season } ) }
                 title="Constructors">
@@ -42,6 +33,7 @@ export default class Menu extends Component {
 
             //Pilotos
             <Button
+                //style=  {style.boxImpar}
                 key={ `drivers-${season}` }
                 onPress={ () => this.props.navigation.navigate('Drivers', { season: season } ) }
                 title="Drivers">
@@ -49,6 +41,7 @@ export default class Menu extends Component {
 
             //Corridas
             <Button
+                //style= {style.boxPar}
                 key={ `races-${season}` }
                 onPress={ () => this.props.navigation.navigate('Races', { season: season } ) }
                 title="Races">
@@ -59,8 +52,9 @@ export default class Menu extends Component {
 
     render() {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={ style.container }>
                 <ScrollView>
+                    <Logo />
                     { this.renderMenu() }
                 </ScrollView>
             </SafeAreaView>

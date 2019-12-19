@@ -16,6 +16,7 @@ const style = StyleSheet.create({
   }
 });
 
+//Import das fontes
 (fonts());
 
 export default class Drivers extends Component {
@@ -59,7 +60,7 @@ export default class Drivers extends Component {
     for (let index = 0; index < this.state.data.length; index++) {
         element.push(
             <Button
-                key={ `drivers-${this.state.season}` }
+                key={ `drivers-${this.state.season}-${index}` }
                 onPress={ () => this.props.navigation.navigate('Details', 
                   { detTitle: `Pilotos da Temporada de ${this.state.season}`,
 

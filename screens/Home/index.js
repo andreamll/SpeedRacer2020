@@ -2,30 +2,22 @@
 //Mostra listagem com as temporadas
 
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
-import fonts from '../../fonts';
+//import fonts from '../../fonts';
 import Logo from '../../components/Logo';
 import Seasons from './components/seasons';
 
-//Estilizacao da tela
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
 //Import das fontes
-(fonts());
+//(fonts());
+
+//Estilizacao da tela
+import style from '../../components/Styles'
 
 //Renderizacao da tela
 export default class Home extends Component {
   static navigationOptions = {
-    //headerTitle: <Logo />,
     headerTitle: 'SpeedRacer 2020'
   }
 
@@ -34,7 +26,7 @@ export default class Home extends Component {
 
     this.getData = this.getData.bind(this);
   }
-  
+
   //De acordo com a temporada escolhida, carrega o menu para escolha 
   //das opcoes: Construtores, Pilotos ou Corridas
   getData(year) {
@@ -42,6 +34,7 @@ export default class Home extends Component {
   }
   
   render() {
+
     return (
       <SafeAreaView style={ style.container }>
         <ScrollView>
