@@ -44,7 +44,7 @@ export default class Constructors extends Component {
 
     //Titulo da listagem
     element.push(
-      <Text style= {style.mainTitle}>Construtores da Temporada de {this.state.season}</Text> 
+      <Text style= {style.mainTitle} key={ 'constructors-title' }>Construtores da Temporada de {this.state.season}</Text> 
     )
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida

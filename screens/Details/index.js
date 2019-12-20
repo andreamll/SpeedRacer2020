@@ -22,32 +22,30 @@ export default class Details extends Component {
 
     //Titulo da listagem
     element.push(
-      <Text style= {style.mainTitle}>{ this.props.navigation.getParam('detTitle') }</Text>
+      <Text style= {style.mainTitle} key={ 'detTitle' }>{ this.props.navigation.getParam('detTitle') }</Text>
     )
 
     //Info 1
     element.push(
-      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo1')}:</Text>,
-      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo1')}</Text>,
-      <Text style= {style.detTitle}>&nbsp;</Text>,
+      <Text style= {style.detTitle} key={ 'detSubjInfo1' }>{this.props.navigation.getParam('detSubjInfo1')}:</Text>,
+      <Text style= {style.bodyTitle} key={ 'detValueInfo1' }> {this.props.navigation.getParam('detValueInfo1')}</Text>,
+      <Text style= {style.detTitle} key={ 'detSpaceInfo1' }>&nbsp;</Text>,
     )
 
     //Info 2
     element.push(
-      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo2')}:</Text>,
-      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo2')}</Text>,
-      <Text style= {style.detTitle}>&nbsp;</Text>,
+      <Text style= {style.detTitle} key={ 'detSubjInfo2' }>{this.props.navigation.getParam('detSubjInfo2')}:</Text>,
+      <Text style= {style.bodyTitle} key={ 'detValueInfo2' }> {this.props.navigation.getParam('detValueInfo2')}</Text>,
+      <Text style= {style.detTitle} key={ 'detSpaceInfo2' }>&nbsp;</Text>,
     )
 
     //Info 3
     element.push(
-      <Text style= {style.detTitle}>{this.props.navigation.getParam('detSubjInfo3')}:</Text>,
-      <Text style= {style.bodyTitle}> {this.props.navigation.getParam('detValueInfo3')}</Text>,
-      <Text style= {style.detTitle}>&nbsp;</Text>,
+      <Text style= {style.detTitle} key={ 'detSubjInfo3' }>{this.props.navigation.getParam('detSubjInfo3')}:</Text>,
+      <Text style= {style.bodyTitle} key={ 'detValueInfo3' }> {this.props.navigation.getParam('detValueInfo3')}</Text>,
+      <Text style= {style.detTitle} key={ 'detSpaceInfo3' }>&nbsp;</Text>,
     )
     return element;
-
-    this.setState({ loading: false});  
   }
 
   render() {

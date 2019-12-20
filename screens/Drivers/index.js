@@ -44,7 +44,7 @@ export default class Drivers extends Component {
 
     //Titulo da listagem
     element.push(
-      <Text style= {style.mainTitle}>Pilotos da Temporada de {this.state.season}</Text> 
+      <Text style= {style.mainTitle} key={ 'drivers-title' }>Pilotos da Temporada de {this.state.season}</Text> 
     )
 
     //varre retorno da API para mostrar pilotos da temporada escolhida

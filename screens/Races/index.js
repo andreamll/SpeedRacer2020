@@ -44,7 +44,7 @@ export default class Races extends Component {
 
     //Titulo da listagem
     element.push(
-        <Text style= {style.mainTitle}>Corridas da Temporada de {this.state.season}</Text> 
+        <Text style= {style.mainTitle} key={ 'races-title' }>Corridas da Temporada de {this.state.season}</Text> 
     )
 
     //varre retorno da API para mostrar local das corridas da temporada escolhida
