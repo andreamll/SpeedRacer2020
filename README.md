@@ -36,7 +36,9 @@ error Invalid regular expression: /(.*\\__fixtures__\\.*|node_modules[\\\]react[
 Metro Bundler process exited with code 1
 ```
 
-It appears in \node_modules\metro-config\src\defaults\blacklist.js, there is an invalid regular expression. Change the first expression under sharedBlacklist from:
+It appears in \node_modules\metro-config\src\defaults\blacklist.js, there is an invalid regular expression. Change the first expression under sharedBlacklist 
+
+from:
 ```
 var sharedBlacklist = [
   /node_modules[/\\]react[/\\]dist[/\\].*/,
