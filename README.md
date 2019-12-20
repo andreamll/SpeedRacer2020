@@ -69,7 +69,7 @@ A web page should open in your default browser (e.g.: http://localhost:19002/).
 
 - Change the connection mode to "Local"
 - Click on your favorite simulator link (Android or IOS)
-*** If you choose Android, remember to open ADV manager
+  *** If you choose Android, remember to open AVD manager
 
 ## Version
 
