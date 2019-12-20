@@ -1,6 +1,6 @@
 # Speed Racer 2020
 
-A React Native application.
+A React Native application to search info about 2000 to 2019 Formule 1 seasons.
 
 ## Getting Started
 
